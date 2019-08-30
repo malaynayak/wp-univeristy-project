@@ -1,5 +1,5 @@
 exports.themeLocation = './app/wp-content/themes/university-theme/';
-exports.urlToPreview = 'http://localhost:8080/wpuniversity/app';
+exports.urlToPreview = 'http://localhost/wpuniversity/app';
 
 // If you're using Local by Flywheel you will
 // want your settings to be similar to the examples below:
