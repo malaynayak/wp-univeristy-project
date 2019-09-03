@@ -74,7 +74,7 @@ class Search {
             this.resultsDiv.html(`
                 <h2 class="serach-overlay__section-title">General Infromation</h2>
                 ${combinedResults.length ? '<ul class="link-list min-list">' : '<p>No Search Results</p>'}
-                ${combinedResults.map(item => `<li><a href="${item.link}">${item.title.rendered}</a></li>`).join('')}
+                ${combinedResults.map(item => `<li><a href="${item.link}">${item.title.rendered}</a> ${item.type == 'post' ? `by ${item.authorName}` : ''} </li>`).join('')}
                 ${combinedResults.length ? '</ul>' : ''}
             `);
             this.isSpinnerVisible = false;
