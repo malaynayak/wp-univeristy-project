@@ -25,7 +25,8 @@ class Search {
     openOverlay() {
         this.searchOverlay.addClass('search-overlay--active');
         $('body').addClass('body-no-scroll');
-        this.isOverlayOpen = true; 
+        this.isOverlayOpen = true;
+        return false;
     }
 
     closeOverlay() {
