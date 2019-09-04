@@ -43,7 +43,6 @@ function university_post_types() {
         ],
         'supports' => [
             'title', 
-            'editor', 
         ],
         'show_in_rest' => TRUE,
         'menu_icon' => 'dashicons-awards',
