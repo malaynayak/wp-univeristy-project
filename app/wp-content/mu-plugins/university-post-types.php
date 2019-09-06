@@ -17,6 +17,8 @@ function university_post_types() {
         'rewrite' => [
             'slug' => 'events'
         ],
+        'capability_type' => 'event',
+        'map_meta_cap' => true,
         'supports' => [
             'title', 
             'excerpt', 
@@ -86,6 +88,8 @@ function university_post_types() {
         'rewrite' => [
             'slug' => 'campuses'
         ],
+        'capability_type' => 'event',
+        'map_meta_cap' => true,
         'supports' => [
             'title', 
             'excerpt', 
