@@ -169,3 +169,91 @@ add_filter('wp_insert_post_data', function($data, $postArr) {
     }
     return $data;
 }, 10, 2);
+
+// Add custiom options page for social media links.
+add_action("admin_menu", function() {
+    add_menu_page(
+		'Social Media Settings',
+		'Social Media Settings',
+		'manage_options',
+		'social_settings',
+		'social_media_settings_page',
+ 		'dashicons-share',
+		100
+	);
+});
+
+function social_media_settings_page() { ?>
+  <div class="wrap">
+    <?php screen_icon(); ?>
+    <h2>University Social Media Settings</h2>
+    <form method="post" action="options.php">
+        <?php settings_fields( 'myplugin_options_group' ); ?>
+        <?php
+            settings_fields( 'social_settings' );
+            do_settings_sections( 'social_settings' );
+            submit_button();
+        ?>
+    </form>
+  </div>
+<?php
+} 
+
+add_action('admin_init', function() {
+    add_settings_section( 'social_links', 'Social Links', false, 'social_settings' );
+});
+
+add_action('admin_init', function() {
+    $fields = [
+        [
+            'uid' => 'facebook_url',
+            'label' => 'Facebook Url',
+            'section' => 'social_links',
+            'type' => 'url',
+            'options' => false,
+            'placeholder' => 'Facebook Url',
+            'default' => ''
+        ],
+        [
+            'uid' => 'twitter_url',
+            'label' => 'Twitter Url',
+            'section' => 'social_links',
+            'type' => 'url',
+            'options' => false,
+            'placeholder' => 'Twitter Url',
+        ],
+        [
+            'uid' => 'linkedin_url',
+            'label' => 'Linkedin Url',
+            'section' => 'social_links',
+            'type' => 'url',
+            'options' => false,
+            'placeholder' => 'Linkedin Url',
+        ],
+        [
+            'uid' => 'youtube_url',
+            'label' => 'Youtube Url',
+            'section' => 'social_links',
+            'type' => 'url',
+            'options' => false,
+            'placeholder' => 'Youtube Url',
+        ],
+        [
+            'uid' => 'instagram_url',
+            'label' => 'Instagram Url',
+            'section' => 'social_links',
+            'type' => 'url',
+            'options' => false,
+            'placeholder' => 'Instagram Url',
+        ],
+    ];
+    foreach( $fields as $field ){
+        add_settings_field( $field['uid'], $field['label'], 'social_link_field_callback', 'social_settings', $field['section'], $field );
+        register_setting( 'social_settings', $field['uid'] );
+    }
+});
+
+function social_link_field_callback($arguments) {
+    $value = get_option( $arguments['uid'] ); // Get the current value
+    printf( '<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" size="60" />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value);
+}
